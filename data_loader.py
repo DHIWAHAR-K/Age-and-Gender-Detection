@@ -15,4 +15,4 @@ def load_utkface_dataset(dataset_path):
     df = pd.DataFrame()
     df['image'], df['age'], df['gender'] = image_path, age_labels, gender_labels
     df = df.astype({'age':'float32', 'gender': 'int32'})
-    return df
+    return df 
