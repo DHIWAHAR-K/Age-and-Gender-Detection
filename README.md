@@ -1,93 +1,98 @@
 # Age and Gender Detection
+This project builds a Convolutional Neural Network (CNN) model that simultaneously predicts the **gender** (classification) and **age** (regression) of individuals from facial images in the [UTKFace dataset](https://susanqq.github.io/UTKFace/). It uses grayscale images and leverages a multi-output deep learning model.
 
+## Project Structure:
 
+- `data_loader.py`: Loads image file names and extracts age and gender labels from filenames.
+- `preprocess.py`: Preprocesses images and prepares input arrays for model training.
+- `model_builder.py`: Defines and compiles the CNN model with dual outputs for gender and age.
+- `visualize.py`: Plots and saves training and validation loss graphs.
+- `main.py`: Main training script – handles data loading, preprocessing, model training, and visualization.
+- `predict.py`: Contains a function to test the model on a single sample and visualize the result.
 
-## Getting started
+## Setup and Installation:
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+### 1. Clone the Repository
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+```bash
+git clone https://github.com/your-username/utkface-age-gender-prediction.git
+cd utkface-age-gender-prediction
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/DHIWAHAR-K/age-and-gender-detection.git
-git branch -M main
-git push -uf origin main
+
+### 2. Install Required Packages
+
+Make sure you have Python 3.6+ and install dependencies using pip:
+
+```bash
+pip install numpy pandas matplotlib scikit-learn tensorflow
 ```
 
-## Integrate with your tools
+### 3. Download Dataset
 
-- [ ] [Set up project integrations](https://gitlab.com/DHIWAHAR-K/age-and-gender-detection/-/settings/integrations)
+Create a directory called 'data' and then Download the [UTKFace](https://www.kaggle.com/datasets/jangedoo/utkface-new) Dataset and extract it into the data directory:
 
-## Collaborate with your team
+```bash
+data/UTKFACE
+```
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-## Test and Deploy
+## Usage:
 
-Use the built-in continuous integration in GitLab.
+Train the model
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+```bash
+python main.py
+```
 
-***
+This will:
 
-# Editing this README
+	•	Load and shuffle the dataset
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+	•	Preprocess 15% of the data (for faster training)
 
-## Suggestions for a good README
+	•	Train a CNN model for EPOCHS (default: 20)
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+	•	Save training loss graphs into the graphs/ folder
 
-## Name
-Choose a self-explaining name for your project.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+## Predict on a Sample Image:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Modify and run predict.py
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+```bash
+predict_and_display(model, x_train, y_gender, y_age, index=0)
+```
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+This will:
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+	•	Print actual vs. predicted age and gender
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+	•	Display the image with matplotlib
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## Model Architecture:
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+	•	Input: 128×128 grayscale facial image
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+	•	Shared Convolutional Layers:
 
-## License
-For open source projects, say how it is licensed.
+	•	Conv2D → BatchNorm → MaxPooling (x3)
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+	•	Gender Branch:
+
+	•	Dense → Dropout → Sigmoid Output
+
+	•	Age Branch:
+
+	•	Dense → Dense → Dropout → ReLU Output
+
+## Loss Functions:
+
+	•	Gender: Binary Cross-Entropy
+
+	•	Age: Mean Squared Error (MSE)
+
+## License:
+
+This project is intended for educational and research purposes. Feel free to fork and modify for your use.
