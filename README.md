@@ -46,13 +46,13 @@ python main.py
 
 This will:
 
-	•	Load and shuffle the dataset
+1. Load and shuffle the dataset
 
-	•	Preprocess 15% of the data (for faster training)
+2. Preprocess 15% of the data (for faster training)
 
-	•	Train a CNN model for EPOCHS (default: 20)
+3. Train a CNN model for EPOCHS (default: 20)
 
-	•	Save training loss graphs into the graphs/ folder
+4. Save training loss graphs into the graphs/ folder
 
 
 ## Predict on a Sample Image:
@@ -66,32 +66,32 @@ predict_and_display(model, x_train, y_gender, y_age, index=0)
 
 This will:
 
-	•	Print actual vs. predicted age and gender
+1. Print actual vs. predicted age and gender
 
-	•	Display the image with matplotlib
+2. Display the image with matplotlib
 
 
 ## Model Architecture:
 
-	•	Input: 128×128 grayscale facial image
+Input: 128×128 grayscale facial image
 
-	•	Shared Convolutional Layers:
+Shared Convolutional Layers:
 
-	•	Conv2D → BatchNorm → MaxPooling (x3)
+Conv2D → BatchNorm → MaxPooling (x3)
 
-	•	Gender Branch:
+Gender Branch:
 
-	•	Dense → Dropout → Sigmoid Output
+Dense → Dropout → Sigmoid Output
 
-	•	Age Branch:
+Age Branch:
 
-	•	Dense → Dense → Dropout → ReLU Output
+Dense → Dense → Dropout → ReLU Output
 
 ## Loss Functions:
 
-	•	Gender: Binary Cross-Entropy
+Gender: Binary Cross-Entropy
 
-	•	Age: Mean Squared Error (MSE)
+Age: Mean Squared Error (MSE)
 
 ## License:
 
